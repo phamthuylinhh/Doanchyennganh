@@ -1,0 +1,100 @@
+﻿
+@using Doan.Models;
+@model IList<Menu>;
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h2>Danh sách menu</h2>
+    </div>
+
+    <p>
+        <a a type="button" class="btn btn-success" asp-area="Admin" asp-controller="Menu" asp-action="Create">
+        <i class="bi bi-file-earmark-text me-1"></i>Thêm menu</a>
+     </p>
+     <section class="section dashboard">
+         <div class="row">
+             <div class="col-12">
+                 <div class="card recent-sales overflow-auto">
+                     <div class="card-body mt-4">
+                         <table class="table table-borderless datatable">
+                             <thead>
+                                 <tr>
+                                    <th>#</th>
+                                    <th>Tiêu đề</th>
+                                    <th>Mức</th>
+                                    <th>Menu cha</th>
+                                    <th>Thứ tự</th>
+                                    <th>Vị trí</th>
+                                    <th>Đường dẫn</th>
+                                    <th>Ẩn/hiện</th>
+                                    <th>Chức năng</th>
+                                 </tr>
+                             </thead>
+                             <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <th scope="row">@item.MenuID</th>
+                                        <td>@item.MenuName</td>
+                                        <td>@item.Levels</td>
+                                        <td>@item.ParentID</td>
+                                        <td>@item.MenuOrder</td>
+                                        <td>@item.Position</td>
+                                        <td>@item.Link</td>
+                                        <td>@item.IsActive</td>
+                                        <td class=" action-buttons">
+                                            <a asp-area="admin" asp-controller="menu" asp-action="edit" asp-route-id="@item.MenuID" class="btn btn-primary" title="Sửa menu"><i class="bi bi-pencil"></i></a>
+                                            <a asp-area="admin" asp-controller="menu" asp-action="delete" asp-route-id="@item.MenuID" class="btn btn-danger" title="Xoá menu"><i class="bi bi-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                             </tbody>
+                         </table>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </section>
+</main>
+
+@* <div class="card">
+    <h5 class="card-header">Danh sách menu</h5>
+    <div class="table-responsive text-nowrap">
+        <table class="table">
+            <thead>
+                <tr class="text-nowrap">
+                    <th>#</th>
+                    <th>Tiêu đề</th>
+                    <th>Mức</th>
+                    <th>Menu cha</th>
+                    <th>Thứ tự</th>
+                    <th>Vị trí</th>
+                    <th>Đường dẫn</th>
+                    <th>Ẩn/hiện</th>
+                    <th>Chức năng</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <th scope="row">@item.MenuID</th>
+                        <td>@item.MenuName</td>
+                        <td>@item.Levels</td>
+                        <td>@item.ParentID</td>
+                        <td>@item.MenuOrder</td>
+                        <td>@item.Position</td>
+                        <td>@item.Link</td>
+                        <td>@item.IsActive</td>
+                        <td class=" action-buttons">
+                            <a asp-area="admin" asp-controller="menu" asp-action="edit" asp-route-id="@item.MenuID" class="btn btn-primary" title="Sửa menu"><i class="bi bi-pencil"></i></a>
+                            <a asp-area="admin" asp-controller="menu" asp-action="delete" asp-route-id="@item.MenuID" class="btn btn-danger" title="Xoá menu"><i class="bi bi-trash"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div> *@

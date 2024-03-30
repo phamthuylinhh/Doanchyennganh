@@ -1,0 +1,54 @@
+﻿
+@model Doan.Models.Slide
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h2>Xác nhận sửa Slide</h2>
+    </div>
+    <div class="container shadow p-5">
+        <div class="row pb-2">
+            <h2>Sửa Slide</h2>
+        </div>
+        <form method="post" asp-action="Edit">
+            <div asp-validation-summary="All"></div>
+            <div class="form-row">
+                <input type="text" class="form-control mb-3" asp-for="Id" type="hidden" />
+                <div class="form-group col-md-6">
+                    <label asp-for="Id">Id</label>
+                    <input type="text" class="form-control mb-3" asp-for="Id" placeholder="Nhap Id" />
+                    <span asp-validation-for="Id" class="alert-danger"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-row">
+                  
+                    <div class="form-group col-md-6">
+                        <label asp-for="Title">Tiêu đề</label>
+                        <input type="text" class="form-control mb-3" asp-for="Title" placeholder="Enter Title" />
+                        <span asp-validation-for="Title" class="alert-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="Contents">Contents</label>
+                        <input type="text" class="form-control mb-3" asp-for="Contents" placeholder="Enter Contents" />
+                        <span asp-validation-for="Contents" class="alert-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="Images">Hình ảnh</label>
+                        <input type="text" class="form-control mb-3" asp-for="Images" placeholder="Enter Images" />
+                        <span asp-validation-for="Images" class="alert-danger"></span>
+                    </div>
+                    <div class="form-group mt-3 mb-5">
+                        <label>
+                            @Html.CheckBox("IsActive", Model.IsActive)
+                            Hiện thị
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-lg btn-rimary p-2"><i class="bi bi-file-plus-fill"></i>Lưu</button>
+                <a asp-controller="Slide" asp-action="Edit" class="btn btn-lg btn-warning p-2">Quay lại</a>
+            </div>
+        </form>
+    </div>
+</main>
