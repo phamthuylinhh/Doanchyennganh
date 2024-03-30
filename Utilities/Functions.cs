@@ -34,5 +34,11 @@ namespace Doan.Utilities
                 str = MD5Hash (str + "_" +str);
             return str;
         }
+        public static bool IsLogin()
+        {
+            if (string.IsNullOrEmpty(Functions._UserName) || string.IsNullOrEmpty (Functions._Email)|| (Functions._UserID <= 0))
+                return false;
+            return true;
+        }
     }
 }

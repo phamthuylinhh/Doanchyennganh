@@ -2,6 +2,7 @@
 using Doan.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Doan.Utilities;
 
 namespace Doan.Areas.Admin.Controllers
 {
@@ -15,6 +16,8 @@ namespace Doan.Areas.Admin.Controllers
         }
         public IActionResult Index() 
         {
+            if (!Functions.IsLogin())
+                return RedirectToAction("Index", "Login");
             var mnList = _context.Menu.OrderBy(m=>m.MenuID).ToList();
             return View(mnList);    
         }

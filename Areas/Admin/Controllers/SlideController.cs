@@ -1,4 +1,5 @@
 ﻿using Doan.Models;
+using Doan.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -14,7 +15,9 @@ namespace Doan.Areas.Admin.Controllers
 		}
 		public IActionResult Index()
 		{
-			var mnList = _context.Slide.OrderBy(m =>m.Id).ToList();
+            if (!Functions.IsLogin())
+                return RedirectToAction("Index", "Login");
+            var mnList = _context.Slide.OrderBy(m =>m.Id).ToList();
 			return View(mnList);
 		}
         public IActionResult Delete(int? id)
