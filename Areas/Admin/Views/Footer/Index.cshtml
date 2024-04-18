@@ -1,21 +1,16 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-@using Doan.Models;
-@model IList<Slide>
+﻿@using Doan.Models;
+@model IList<Footer>
 @{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 <main id="main" class="main">
     <div class="pagetitle">
-        <h2>Danh sách Slide</h2>
+        <h2>Danh sách menu</h2>
     </div>
 
     <p>
-        <a a type="button" class="btn btn-success" asp-area="Admin" asp-controller="Slide" asp-action="Create">
-            <i class="bi bi-file-earmark-text me-1"></i>Thêm Slide
+        <a a type="button" class="btn btn-success" asp-area="Admin" asp-controller="footer" asp-action="Create">
+            <i class="bi bi-file-earmark-text me-1"></i>Thêm menu footer
         </a>
     </p>
     <section class="section dashboard">
@@ -29,10 +24,8 @@
                                     <th>#</th>
                                     <th>Tiêu đề</th>
                                     <th>Nội dung</th>
-                                    <th>Hình ảnh</th>
-                                    <th>Ẩn/Hiện</th>
                                     <th>Chức năng</th>
-                                    @*  <th>Menu cha</th>
+                                   @*  <th>Menu cha</th>
                                     <th>Thứ tự</th>
                                     <th>Vị trí</th>
                                     <th>Đường dẫn</th>
@@ -44,14 +37,17 @@
                                 @foreach (var item in Model)
                                 {
                                     <tr>
-                                        <th scope="row">@item.Id</th>
+                                        <th scope="row">@item.Id</th> 
                                         <td>@item.Title</td>
                                         <td>@item.Contents</td>
-                                        <td>@item.Images</td>
-                                        <td>@item.IsActive</td>
+                                       @*  <td>@item.ParentID</td>
+                                        <td>@item.MenuOrder</td>
+                                        <td>@item.Position</td>
+                                        <td>@item.Link</td>
+                                        <td>@item.IsActive</td> *@
                                         <td class=" action-buttons">
-                                            <a asp-area="admin" asp-controller="Slide" asp-action="edit" asp-route-id="@item.Id" class="btn btn-primary" title="Sửa slide"><i class="bi bi-pencil"></i></a>
-                                            <a asp-area="admin" asp-controller="Slide" asp-action="delete" asp-route-id="@item.Id" class="btn btn-danger" title="Xoá slide"><i class="bi bi-trash"></i></a>
+                                            <a asp-area="admin" asp-controller="footer" asp-action="edit" asp-route-id="@item.Id" class="btn btn-primary" title="Sửa menu"><i class="bi bi-pencil"></i></a>
+                                            <a asp-area="admin" asp-controller="footer" asp-action="delete" asp-route-id="@item.Id" class="btn btn-danger" title="Xoá menu"><i class="bi bi-trash"></i></a>
                                         </td>
                                     </tr>
                                 }

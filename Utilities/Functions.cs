@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace Doan.Utilities
@@ -40,5 +41,7 @@ namespace Doan.Utilities
                 return false;
             return true;
         }
+
+        
     }
 }

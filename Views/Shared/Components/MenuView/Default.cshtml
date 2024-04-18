@@ -73,14 +73,14 @@
 								@if (Smenu.Count == 0)
 								{
 									<ul class="navbar_menu">
-										<li><a class="" href="@item.Link">@item.MenuName</a></li>
+										<li><a class="" href="~/@item.Link">@item.MenuName</a></li>
 									</ul>
 								}
 								else
 								{
 							
 										<ul class="navbar_menu">
-											<a href="#"><span>@item.MenuName</span><i class="bi bi-chevron-down"></i></a>
+											<a href="#"> <span>@item.MenuName</span><i class="bi bi-chevron-down"></i></a>
 											@foreach (var smn in Smenu)
 											{
 												<ul>
@@ -88,11 +88,13 @@
 												</ul>
 											}
 										</ul>
+										
 								}
 							}
 							<ul class="navbar_user">
 								<li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
-								<li><a href="~/admin/"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+								<li><a href="/Admin"><i class="fa fa-user" aria-hidden="true"></i></a></li> 
+							
 								<li class="checkout">
 									<a href="#">
 										<i class="fa fa-shopping-cart" aria-hidden="true"></i>

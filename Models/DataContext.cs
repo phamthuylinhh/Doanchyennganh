@@ -20,5 +20,7 @@ namespace Doan.Models
         public DbSet<Benefit> Benefit { get; set; }
         public DbSet<Footer> Footer { get; set; }
         public DbSet<AdminUser> AdminUsers { get; set; }
+        public DbSet<Products> Products { get; set; }
+        public DbSet<Category> Category { get; set; }
     }
 }

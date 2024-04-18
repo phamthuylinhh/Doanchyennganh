@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
+   
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -41,14 +41,14 @@
 </head>
 
 <body>
-
+    
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
 
         <div class="d-flex align-items-center justify-content-between">
             <a href="index.html" class="logo d-flex align-items-center">
-                <img src="~/admin/assets/img/logo.png" alt="">
-                <span class="d-none d-lg-block">NiceAdmin</span>
+                <img src="~/admin/assets/img/thoitrang.jpg" alt="">
+                <span class="d-none d-lg-block">GENZ</span>
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
@@ -229,7 +229,7 @@
                         <li>
                             <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
                                 <i class="bi bi-person"></i>
-                                <span>My Profile</span>
+                                <span>Trang cá nhân</span>
                             </a>
                         </li>
                         <li>
@@ -237,9 +237,9 @@
                         </li>
 
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                            <a class="dropdown-item d-flex align-items-center" href="home">
                                 <i class="bi bi-gear"></i>
-                                <span>Account Settings</span>
+                                <span>Trang chủ</span>
                             </a>
                         </li>
                         <li>
@@ -256,11 +256,25 @@
                             <hr class="dropdown-divider">
                         </li>
 
-                        <li>
+                      @*  <li>
+                            <a class="dropdown-item d-flex align-items-center" href="/">
+                                <i class="bi bi-box-arrow-right"></i>
+                                <span>Sign Out</span>
+                           
+                            </a>
+                        </li>
+  *@
+                       @*  <li>
                             <a class="dropdown-item d-flex align-items-center" href="/Admin/Home/Logout">
                                 <i class="bi bi-box-arrow-right"></i>
                                 <span>Sign Out</span>
-                                <a href="Admin/Home/Logout/Register" class="btn btn-primary">Đăng Xuất</a>
+                            </a>
+                        </li>
+  *@
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="/Admin/Logout/">
+                                <i class="bi bi-box-arrow-right"></i>
+                                <span>Đăng xuất</span>
                             </a>
                         </li>
 
@@ -277,7 +291,7 @@
   @RenderBody()
 
     <!-- ======= Footer ======= -->
-    <footer id="footer" class="footer">
+   @*  <footer id="footer" class="footer">
         <div class="copyright">
             &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
         </div>
@@ -291,7 +305,7 @@
     </footer><!-- End Footer -->
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
+ *@
     <!-- Vendor JS Files -->
     <script src="~/admin/assets/vendor/apexcharts/apexcharts.min.js"></script>
     <script src="~/admin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
