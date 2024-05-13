@@ -1,5 +1,6 @@
 
 using Doan.Models;
+using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 var builder = WebApplication.CreateBuilder(args);
@@ -38,3 +39,4 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+

@@ -1,4 +1,5 @@
 using Doan.Models;
+using Doan.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Build.Framework;
 using Microsoft.EntityFrameworkCore;
@@ -26,17 +27,31 @@ namespace Doan.Controllers
             var products = (from p in _context.Products/*.Where(m => m.product_category_id == 1) */select p).ToList();
             return products;
         }
-
+        
 
         public IActionResult Privacy()
         {
             return View();
         }
+        public class LogoutController : Controller
+        {
+            public IActionResult Index()
+            {
+                Functions._UserID = 0;
+                Functions._UserName = string.Empty;
+                Functions._Email = string.Empty;
+                Functions._Message = string.Empty;
+                Functions._MessageEmail = string.Empty;
 
-        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        //public IActionResult Error()
-        //{
-        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        //}
+
+                //return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "home", new { area = "" }); // is true
+
+            }
+        }
+
+
+
+
     }
 }

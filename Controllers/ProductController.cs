@@ -1,5 +1,6 @@
 ﻿using Doan.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Doan.Controllers
 {
@@ -14,26 +15,32 @@ namespace Doan.Controllers
 			_context = context;
 		}
 
+
 		[Route("/product/")]
 		public IActionResult Index(Dictionary<string, string> request)
 		{
+			var categories = _context.Category.ToList();
+			var id = 0;
+			if (!request.ContainsKey("category")) id = categories[0].id;
+			else id = int.Parse(request["category"]);
 
-			var s = _context.Category.ToList();
-			ViewBag.Category = s[0].id;	
-			return View(s);
-        }
-        [Route("/product/{id:int}")]
-        public IActionResult Index(int id)
-        {
-            var s = _context.Category.ToList();
-            ViewBag.Category = id;
-            return View(s);
-        }
-        [Route("/product_get/{id:int}")]
-        public IActionResult product_get(int Id)
-		{
-			var listProduct = _context.Products.Where(n => n.Category_id == Id).ToList();
-			return Ok(listProduct);
+			var products = _context.Products.Where(n => n.Category_id == id).ToList();
+			ViewBag.categories = categories;
+			return View(products);
 		}
+		//[Route("/details/")]
+		public IActionResult Details(int id)
+		{
+			var cc = _context.Products.FirstOrDefault(p =>p.Id == id) ;
+		
+				if (cc == null)
+				{
+					return NotFound();
+				}
+			return View(cc);
+			
+		}
+		
+		
 	}
 }

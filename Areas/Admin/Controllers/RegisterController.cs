@@ -8,6 +8,7 @@ using Doan.Utilities;
 namespace Doan.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Route("~/admin/register")]
     public class RegisterController : Controller
     {
         private readonly DataContext _context;

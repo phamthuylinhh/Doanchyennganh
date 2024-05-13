@@ -1,11 +1,10 @@
-﻿  @model IList<NewArrivals>
-
+﻿   @model IList<NewArrivals>
 <div class="new_arrivals">
 	<div class="container">
 		<div class="row">
 			<div class="col text-center">
 				<div class="section_title new_arrivals_title">
-					<h2>SẢN PHẨM BÁN CHAY</h2>
+					<h2 style="font-family: Time new romand">SẢN PHẨM BÁN CHAY</h2>
 				</div>
 			</div>
 		</div>
@@ -13,10 +12,10 @@
 			<div class="col text-center">
 				<div class="new_arrivals_sorting">
 					<ul class="arrivals_grid_sorting clearfix button-group filters-button-group">
-						<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked" data-filter="*">Tất cả</li>
-						 <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".women">Trang phục</li>
-						<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".accessories">Phụ kiện</li>
-						<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".men">Làm đẹp</li> 
+						<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked" data-filter="*" style="font-family: Time new romand">Tất cả</li>
+						<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".women" style="font-family: Time new romand">Trang phục</li>
+						<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".accessories" style="font-family: Time new romand">Phụ kiện</li>
+						<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".men" style="font-family: Time new romand">Làm đẹp</li>
 					</ul>
 				</div>
 			</div>
@@ -40,7 +39,7 @@
 								<div class="product_price">$520.00<span>$590.00</span></div>
 							</div>
 						</div>
-						<div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
+						<div class="red_button add_to_cart_button"><a href="#">Chi tiet san pham</a></div>
 					</div>
 
 					}
@@ -59,7 +58,7 @@
 								<div class="product_price">$610.00</div>
 							</div>
 						</div>
-						<div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
+							<div class="red_button add_to_cart_button"><a href="#">Chi tiet san pham</a></div>
 					</div>
 					}
 
@@ -77,13 +76,9 @@
 								<div class="product_price">$410.00</div>
 							</div>
 						</div>
-						<div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
+							<div class="red_button add_to_cart_button"><a href="@Url.Action(" Details", "Product")">Chi tiet san pham</a></div>
 					</div>
 					}
-
-				
-
-					
 					</div>
 				</div>
 			</div>
@@ -93,8 +88,3 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="path/to/jquery.min.js"></script>
-
-
-
- 
- 

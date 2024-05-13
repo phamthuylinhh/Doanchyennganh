@@ -51,6 +51,7 @@ namespace Doan.Areas.Admin.Controllers
             if (!Functions.IsLogin())
                 return RedirectToAction("Index", "Login");
             var mnList = _context.AdminUsers.OrderBy(m => m.UserId).ToList();
+            //return Ok(mnList);
             return View(mnList);
         }
     }

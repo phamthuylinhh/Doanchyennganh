@@ -1,14 +1,14 @@
 ﻿@model IList<Banner>
-
 <div class="banner">
 	<div class="container">
 		<div class="row">
+			
 			@foreach(var S in Model)
 			{
 			<div class="col-md-4">
 				<div class="banner_item align-items-center" style="background-image:url(@S.Images)">
 					<div class="banner_category">
-						<a href="/Product">@S.Name</a>
+							<a href="/product?category=@S.Id" >@S.Name</a>
 					</div>
 				</div>
 			</div>

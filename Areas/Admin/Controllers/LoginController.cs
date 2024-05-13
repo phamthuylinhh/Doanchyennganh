@@ -7,6 +7,7 @@ using Doan.Utilities;
 namespace Doan.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Route("~/admin/login")]
     public class LoginController : Controller
     {
         private readonly DataContext _context;
