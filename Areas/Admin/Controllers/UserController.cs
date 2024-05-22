@@ -50,7 +50,7 @@ namespace Doan.Areas.Admin.Controllers
             //}; if (!Functions.IsLogin())
             if (!Functions.IsLogin())
                 return RedirectToAction("Index", "Login");
-            var mnList = _context.AdminUsers.OrderBy(m => m.UserId).ToList();
+            var mnList = _context.User.OrderBy(m => m.Id).ToList();
             //return Ok(mnList);
             return View(mnList);
         }

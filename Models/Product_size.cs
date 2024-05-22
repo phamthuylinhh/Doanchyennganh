@@ -6,6 +6,6 @@ namespace Doan.Models
 	public class Product_size
 	{
 		public int Id { get; set; }
-		public string? Name { get; set; }
+		public string Name { get; set; }
 	}
 }

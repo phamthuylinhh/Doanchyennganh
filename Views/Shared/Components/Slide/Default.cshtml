@@ -1,7 +1,8 @@
-﻿@model IList<Slide> 
+﻿@model IList<Slide>
+
 @foreach(var item in Model)
 	{
-		<div class="main_slider" style="background-image:url(@item.Images)">
+		<div class="main_slider" style="background-image:url(@item.Images) ;margin-top:revert">
 			<div class="container fill_height">
 				<div class="row align-items-center fill_height">
 					<div class="col">

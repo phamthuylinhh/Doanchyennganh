@@ -1,5 +1,5 @@
 ﻿@using Doan.Areas.Admin.Models
-@model IList<AdminUser>
+@model IList<User>
 @{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
@@ -43,8 +43,8 @@
                                     @foreach (var item in Model)
                                     {
                                         <tr>
-                                            <td>@item.UserId</td>
-                                            <td>@item.UserName</td>
+                                            <td>@item.Id</td>
+                                            <td>@item.Name</td>
                                             <td>@item.Email</td>
                                             <td>
                                                 <div class="password-toggle">
@@ -54,8 +54,8 @@
                                             </td>
                                             <td>@item.IsActive</td>
                                             <td class=" action-buttons">
-                                                <a asp-area="admin" asp-controller="User" asp-action="edit" asp-route-id="@item.UserId" class="btn btn-primary" title="Sửa slide"><i class="bi bi-pencil"></i></a>
-                                                <a asp-area="admin" asp-controller="User" asp-action="delete" asp-route-id="@item.UserId" class="btn btn-danger" title="Xoá slide"><i class="bi bi-trash"></i></a>
+                                                <a asp-area="admin" asp-controller="User" asp-action="edit" asp-route-id="@item.Id" class="btn btn-primary" title="Sửa slide"><i class="bi bi-pencil"></i></a>
+                                                <a asp-area="admin" asp-controller="User" asp-action="delete" asp-route-id="@item.Id" class="btn btn-danger" title="Xoá slide"><i class="bi bi-trash"></i></a>
                                             </td>
                                         </tr>
                                     }

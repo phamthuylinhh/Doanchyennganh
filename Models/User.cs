@@ -14,5 +14,6 @@ namespace Doan.Models
         public string? Img_user { get; set; }
         public bool IsActive { get; set; }
 
+        public string? Phone { get; set; }
     }
 }

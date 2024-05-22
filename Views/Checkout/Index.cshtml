@@ -1,0 +1,190 @@
+﻿@using Doan.Models;
+@model (Doan.Models.User,decimal,List<SelectListItem>)
+@{
+    Layout = "/Views/Shared/_Layout1.cshtml";
+}
+
+
+<section class="ftco-section" style="font-family:'Times New Roman'">
+    <form asp-action="checkout" class="billing-form">
+        <div class="container">
+            <div class="row justify-content-center" style="margin-top:100px">
+                <div class="col-xl-7 ftco-animate">
+                    <h3 class="mb-4 billing-heading" style="font-family:'Times New Roman'">CHI TIẾT ĐẶT HÀNG</h3>
+                    <div class="row align-items-end">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="firstname">Name</label>
+                                <input type="text" class="form-control" placeholder="" name="name" value="@Model.Item1.Name" required>
+                            </div>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <input type="text" class="form-control" placeholder="Address" name="address" value="@Model.Item1.Address" required>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input type="text" class="form-control" placeholder="Phone" name="phone" value="@Model.Item1.Phone" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-5">
+                    <div class="row mt-5 pt-3">
+                        <div class="col-md-12 d-flex mb-5">
+                            <div class="cart-detail cart-total p-3 p-md-4">
+                                <h3 class="billing-heading mb-4">Cart Total</h3>
+                                <p class="d-flex">
+
+                                    <span>Subtotal</span>
+                                    <span id="totalAmount">@Model.Item2 VND</span>
+                                </p>
+                                <p class="d-flex">
+                                    <span>Delivery</span>
+                                    <span> $0.00</span>
+                                </p>
+                                <p class="d-flex">
+                                    <span>Discount</span>
+                                    <span>$0.00</span>
+                                </p>
+                                <hr>
+                                <p class="d-flex total-price">
+                                    <span>Cash</span>
+                                    <span id="">@Model.Item2 VND</span>
+
+                                </p>
+                            </div>
+                        </div>
+                        @*  <div class="col-md-12">
+                            <div class="cart-detail p-3 p-md-4">
+                                <h3 class="billing-heading mb-4" style="font-family:'Times New Roman'">HÌNH THỨC THANH TOÁN</h3>
+                                <select name="paymethodid"
+                                        class="form-control"
+                                        asp-items="@(new SelectList(Model.Item3,"Value","Text"))">
+                                </select>
+                                <p><button type="submit" class="btn btn-primary py-3 px-4">ĐẶT HÀNG</button></p>
+                            </div>
+                        </div>  *@
+                        <div class="col-md-12">
+                            <div class="cart-detail p-3 p-md-4">
+                                <h3 class="billing-heading mb-4" style="font-family: 'Times New Roman', serif;">HÌNH THỨC THANH TOÁN</h3>
+                                <div class="form-group">
+                                    <label for="paymethodid">Chọn phương thức thanh toán:</label>
+                                    <select id="paymethodid" name="paymethodid" class="form-control" asp-items="@(new SelectList(Model.Item3,"Value","Text"))">
+                                    </select>
+                                </div>
+                                <p><button type="submit" class="btn btn-primary py-3 px-4 mt-3" href="@Url.Action("History", "History")">ĐẶT HÀNG</button></p>
+                            </div>
+                        </div> 
+
+                    </div>
+                </div> <!-- .col-md-8 -->
+            </div>
+        </div>
+    </form><!-- END -->
+</section> <!-- .section -->
+<div class="newsletter">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="newsletter_text d-flex flex-column justify-content-center align-items-lg-start align-items-md-center text-center">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to our newsletter and get 20% off your first purchase</p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="newsletter_form d-flex flex-md-row flex-column flex-xs-column align-items-center justify-content-lg-end justify-content-center">
+                    <input id="newsletter_email" type="email" placeholder="Your email" required="required" data-error="Valid email is required.">
+                    <button id="newsletter_submit" type="submit" class="newsletter_submit_btn trans_300" value="Submit" style="background-color:#193083">subscribe</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- loader -->
+<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg></div>
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery-migrate-3.0.1.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script src="js/jquery.waypoints.min.js"></script>
+<script src="js/jquery.stellar.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/aos.js"></script>
+<script src="js/jquery.animateNumber.min.js"></script>
+<script src="js/bootstrap-datepicker.js"></script>
+<script src="js/scrollax.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+<script src="js/google-map.js"></script>
+<script src="js/main.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+        var quantitiy = 0;
+        $('.quantity-right-plus').click(function (e) {
+
+            // Stop acting like a button
+            e.preventDefault();
+            // Get the field name
+            var quantity = parseInt($('#quantity').val());
+
+            // If is not undefined
+
+            $('#quantity').val(quantity + 1);
+
+
+            // Increment
+
+        });
+
+        $('.quantity-left-minus').click(function (e) {
+            // Stop acting like a button
+            e.preventDefault();
+            // Get the field name
+            var quantity = parseInt($('#quantity').val());
+
+            // If is not undefined
+
+            // Increment
+            if (quantity > 0) {
+                $('#quantity').val(quantity - 1);
+            }
+        });
+
+    });
+    $('.quantity-right-plus').click(function (e) {
+        e.preventDefault();
+        var quantity = parseInt($('#quantity').val());
+        $('#quantity').val(quantity + 1);
+        updateTotalAmount();
+    });
+
+    $('.quantity-left-minus').click(function (e) {
+        e.preventDefault();
+        var quantity = parseInt($('#quantity').val());
+        if (quantity > 0) {
+            $('#quantity').val(quantity - 1);
+            updateTotalAmount();
+        }
+    });
+
+    function updateTotalAmount() {
+        // Calculate total amount based on updated quantity and update #totalAmount element
+        var totalAmount = calculateTotalAmount();
+        $('#totalAmount').text(totalAmount);
+        // Send updated data to checkout page using Ajax or update a hidden input field in the form
+        $('#checkoutForm').submit(); // Assuming your form has id="checkoutForm"
+    }
+
+</script>

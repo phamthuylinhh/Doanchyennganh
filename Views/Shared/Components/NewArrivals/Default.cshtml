@@ -1,90 +1,113 @@
-﻿   @model IList<NewArrivals>
+﻿
+						 @using Doan.Models;
+@using Doan.Utilities;
+@model IList<NewArrivals>
+<style>    <style >
+    .new_arrivals {
+        padding: 50px 0;
+    }
+
+    .section_title {
+        margin-bottom: 50px;
+    }
+
+    .product-grid {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .product-item {
+        flex: 1 1 30%;
+        margin: 15px;
+        box-sizing: border-box;
+    }
+
+    .product {
+        background-color: #fff;
+        border: 1px solid #e4e4e4;
+        border-radius: 5px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .product_image {
+        width: 100%;
+        height: auto;
+        text-align: center;
+        padding: 20px;
+    }
+
+        .product_image img {
+            max-width: 100%;
+            height: auto;
+        }
+
+    .product_info {
+        padding: 15px;
+        text-align: center;
+    }
+
+    .product_bubble {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: #ff6f61;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+
+   
+    .favorite_left {
+        position: absolute;
+        left: 10px;
+        top: 10px;
+    }
+</style>
 <div class="new_arrivals">
-	<div class="container">
-		<div class="row">
-			<div class="col text-center">
-				<div class="section_title new_arrivals_title">
-					<h2 style="font-family: Time new romand">SẢN PHẨM BÁN CHAY</h2>
-				</div>
-			</div>
-		</div>
-		<div class="row align-items-center">
-			<div class="col text-center">
-				<div class="new_arrivals_sorting">
-					<ul class="arrivals_grid_sorting clearfix button-group filters-button-group">
-						<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked" data-filter="*" style="font-family: Time new romand">Tất cả</li>
-						<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".women" style="font-family: Time new romand">Trang phục</li>
-						<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".accessories" style="font-family: Time new romand">Phụ kiện</li>
-						<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".men" style="font-family: Time new romand">Làm đẹp</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col">
-				<div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
-
-					<!-- Product 1 -->
-					@foreach(var item in Model.Take(3).Where(m => m.ParentID == 1))
-					{
-					<div class="product-item women">
-						<div class="product discount product_filter">
-							<div class="product_image">
-								<img src="@item.Image" alt="">
-							</div>
-							<div class="favorite favorite_left"></div>
-						
-							<div class="product_info">
-								<h6 class="product_name"><a href="single.html">Fujifilm X100T 16 MP Digital Camera (Silver)</a></h6>
-								<div class="product_price">$520.00<span>$590.00</span></div>
-							</div>
-						</div>
-						<div class="red_button add_to_cart_button"><a href="#">Chi tiet san pham</a></div>
-					</div>
-
-					}
-					<!-- Product 2 -->
-					@foreach (var item in Model.Where(m => m.ParentID == 11))
-					{
-						<div class="product-item accessories">
-						<div class="product product_filter">
-							<div class="product_image">
-								<img src="@item.Image" alt="">
-							</div>
-							<div class="favorite"></div>
-							<div class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center"><span>new</span></div>
-							<div class="product_info">
-								<h6 class="product_name"><a href="single.html">Samsung CF591 Series Curved 27-Inch FHD Monitor</a></h6>
-								<div class="product_price">$610.00</div>
-							</div>
-						</div>
-							<div class="red_button add_to_cart_button"><a href="#">Chi tiet san pham</a></div>
-					</div>
-					}
-
-					@foreach (var item in Model.Where(m=>m.ParentID == 12))
-					{
-					<div class="product-item men">
-						<div class="product product_filter">
-							<div class="product_image">
-								<img src="@item.Image" alt="">
-							</div>
-							<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>sale</span></div>
-							<div class="favorite favorite_left"></div>
-							<div class="product_info">
-								<h6 class="product_name"><a href="single.html">DYMO LabelWriter 450 Turbo Thermal Label Printer</a></h6>
-								<div class="product_price">$410.00</div>
-							</div>
-						</div>
-							<div class="red_button add_to_cart_button"><a href="@Url.Action(" Details", "Product")">Chi tiet san pham</a></div>
-					</div>
-					}
-					</div>
-				</div>
-			</div>
-		</div>
-	
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <div class="section_title new_arrivals_title">
+                    <h2 style="font-family:'Times New Roman';margin-top:-50px">DANH SÁCH NỔI BẬT</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center">
+            <div class="col text-center">
+                <div class="new_arrivals_sorting">
+                    <ul class="arrivals_grid_sorting clearfix button-group filters-button-group" style="font-family:'Times New Roman'">
+                        <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked" data-filter="*">TẤT CẢ</li>
+                        <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".women">QUẦN ÁO</li>
+                        <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".accessories">ÁO PHÔNG</li>
+                        <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".men">VÁY ĐẦM</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="product-grid" id="product-grid">
+                    @foreach (var item in Model)
+                    {
+                        <div class="product-item @(item.ParentID == 1 ? "men" : item.ParentID == 11 ? "women" : "accessories")">
+                            <div class="product product_filter">
+                                <div class="product_image">
+                                    <img src="@item.Image" alt="">
+                                </div>
+                                <div class="favorite favorite_left"></div>
+                                <div class="product_info">
+                                    <h6 class="product_name"><a href="single.html">Fujifilm X100T 16 MP Digital Camera (Silver)</a></h6>
+                                    <div class="product_price">$520.00<span>$590.00</span></div>
+                                </div>
+                            </div>
+                            <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
+                        </div>
+                    }
+                </div>
+               
+            </div>
+        </div>
+    </div>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="path/to/jquery.min.js"></script>

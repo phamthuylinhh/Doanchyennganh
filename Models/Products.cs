@@ -17,6 +17,7 @@ namespace Doan.Models
         public string? Images { get; set; }
         public int? Price { get; set; }
         public string? Link { get; set; }
+        public bool? IsActive { get; set; }
      
 
         

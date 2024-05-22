@@ -24,7 +24,9 @@ namespace Doan.Models
         public DbSet<Category> Category { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<Cart> Cart { get; set; }
-        public DbSet<Product_size> Product_size {  get; set; }        
-
+        public DbSet<Product_size> Product_size {  get; set; }    
+        public DbSet<ProductDetails> ProductDetails { get; set; }
+        public DbSet<Order> Order { get; set; }
+        public DbSet<Pay_method> Pay_method { get; set; }
     }
 }

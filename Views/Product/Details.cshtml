@@ -1,4 +1,5 @@
 ﻿@using Doan.Models;
+@using Doan.Utilities;
 @model Products
 @{
 	Layout = "/Views/Shared/_Layout1.cshtml";
@@ -7,6 +8,7 @@
  <section class="ftco-section " style="margin-top: 120px">
 	<form asp-controller="Cart" asp-action="AddToCart" method="post">
 		<input name="product_id" value="@Model.Id" hidden />
+		<input name="User_id" value="@Functions._UserID" hidden />
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6 mb-5 ftco-animate">
@@ -40,12 +42,14 @@
 							<div class="form-group d-flex">
 								<div class="select-wrap">
 									<div class="icon"><span class="ion-ios-arrow-down"></span></div>
-									<select name="" id="" class="form-control">
-										<option value="">Small</option>
-										<option value="">Medium</option>
-										<option value="">Large</option>
-										<option value="">Extra Large</option>
+									<select name="Size_id" id="" class="form-control">
+										
+										@foreach (var item in ViewBag.sizes)
+										{
+											<option value="@item.Id"><br /><br /> @item.Name</option>
+										}
 									</select>
+								
 								</div>
 							</div>
 						</div>
@@ -79,81 +83,6 @@
 		</div>
 	</form>
 </section>
- @* <section class="ftco-section" style="margin-top: 120px;">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6 mb-5 ftco-animate">
-					<a href="" class="image-popup"><img src="@Model.Images" class="img-fluid" alt="Colorlib Template"></a>
-				</div>
-				<div class="col-lg-6 product-details pl-md-5 ftco-animate">
-					<h3 style="font-family:'Times New Roman', Times, serif">@Model.Name</h3>
-					<div class="rating d-flex">
-						<p class="text-left mr-4">
-							<a href="#" class="mr-2">5.0</a>
-							<a href="#"><span class="ion-ios-star-outline"></span></a>
-							<a href="#"><span class="ion-ios-star-outline"></span></a>
-							<a href="#"><span class="ion-ios-star-outline"></span></a>
-							<a href="#"><span class="ion-ios-star-outline"></span></a>
-							<a href="#"><span class="ion-ios-star-outline"></span></a>
-						</p>
-						<p class="text-left mr-4">
-							<a href="#" class="mr-2" style="color: #000;">100 <span style="color: #bbb;">Rating</span></a>
-						</p>
-						<p class="text-left">
-							<a href="#" class="mr-2" style="color: #000;">500 <span style="color: #bbb;">Sold</span></a>
-						</p>
-					</div>
-						<p class="price"><span style="color:#1e1e27 ; font-size:20px">$@Model.Price</span></p>
-					<p>
-						A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Text should turn around and return to its own, safe country. But nothing the copy said could convince her and so it didn’t take long until.
-					</p>
-					<div class="row mt-4">
-						<div class="col-md-6">
-							<div class="form-group d-flex">
-								<div class="select-wrap">
-									<div class="icon"><span class="ion-ios-arrow-down"></span></div>
-									<select name="" id="" class="form-control" style="color:#1e1e27">
-									 <option value="">Small</option>
-										 <option value="">Medium</option>
-										<option value="">Large</option>
-										<option value="">Extra Large</option> 
-									</select>
-								</div>
-							</div>
-						</div>
-						 <div class="w-100"></div>
-						<div class="input-group col-md-6 d-flex mb-3">
-							<span class="input-group-btn mr-2">
-								<button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
-									<i class="ion-ios-remove"></i>
-								</button>
-							</span>
-							<input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="100">
-							<span class="input-group-btn ml-2">
-								<button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
-									<i class="ion-ios-add"></i>
-								</button>
-							</span>
-						</div>
-
-						<div class="w-100"></div> 
-						
-					</div>
-						<div class="row">
-							<div class="col-12 product-add-to-cart-container">
-					 <form asp-controller="Cart" asp-action="AddToCart" method="post" >
-							<button type="submit" class="btn btn-tinted btn--l YuENex a_JvBi" aria-disabled="false" style="color:black">
-							<img alt="icon-add-to-cart" class="_kL9Hf" src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/productdetailspage/0f3bf6e431b6694a9aac.svg">
-							<span>THÊM VÀO GIỎ HÀNG</span></button>
-						</form>
-
-				</div>
-				
-			</div>
-		</div>
-		</div>
-		</div>
-	</section>  *@
 <section class="ftco-section">
 	<div class="container" >
 		<div class="row justify-content-center mb-3 pb-3">

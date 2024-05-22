@@ -1,9 +1,11 @@
 ﻿ @using Doan.Models;
+ @using Doan.Utilities;
 @{
     Layout = "/Views/Shared/_Layout1.cshtml";
 }
-
-
+@{
+    decimal totalAmount = 0;
+}
     <section class="ftco-section ftco-cart" style="margin-top: 120px;">
         <div class="container">
             <div class="row">
@@ -14,36 +16,35 @@
                                 <tr class="text-center">
                                     <th>&nbsp;</th>
                                     <th>&nbsp;</th>
-                                    <th>Product name</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Total</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Giá tiền</th>
+                                    <th>Số lượng</th>
+                                    <th>Tổng tiền</th>
                                 </tr>
                             </thead>
-                            <tbody>                             
-                                @foreach (var item in @Model)
-{
-				                <tr class="text-center">
-								<td class="product-remove">
-									<form asp-action="Delete" asp-route-id="@item.Cart.Cart_id" method="post">
-										<button class="ion-ios-close" style="border-radius: 8px; width:40px;" type="submit"></button/>
-									</form>
-								</td>
-								<td class="image-prod"><div class="img" style="background-image:url(@item.Products.Images);"></div></td>
-								<td class="product-name">
-									<h3>@item.Products.Name</h3>
-									<p>product_description</p>
-								</td>
-								<td class="price">@item.Products.Price VND</td>
-								<td class="quantity">
-       		                    <for class="input-group mb-3">
-           			                <input type="number" name="quantity" class="quantity form-control input-number" value="@item.Cart.Quantity" min="1" max="100">
-        			            </for>
-								</td>
-								<td class="total">@(item.Cart.Quantity*item.Products.Price) VND</td>
-				                </tr>
-}                            
-                            </tbody>
+                            <tbody>
+                            @foreach (var item in @Model)
+                            {
+                                <tr class="text-center" data-product-id="@item.Cart.Product_id" data-size-id="@item.Cart.Size_id" data-user-id="@item.Cart.User_id">
+                                    <td class="product-remove">
+                                        <a class="ion-ios-close" style="border-radius: 8px; width:40px;" href="/cart/del/@item.Cart.Product_id/@item.Cart.Size_id"></a>
+                                    </td>
+                                    <td class="image-prod"><div class="img" style="background-image:url(@item.Products.Images);"></div></td>
+                                    <td class="product-name">
+                                        <h3 style="font-family:'Times New Roman'">@item.Products.Name</h3>
+                                        <p>@item.Product_size.Name</p>
+                                    </td>
+                                    <td class="price">@item.Products.Price VND</td>
+                                    <td class="quantity">
+                                        <input type="number" name="quantity" class="quantity form-control input-number" value="@item.Cart.Quantity" min="1" max="20">
+                                        <p style="font-family:'Times New Roman'; font-size:small">Số lượng tối đa là 20 sản phẩm</p>
+                                    </td>
+                                    <td class="total">@(item.Cart.Quantity * item.Products.Price) VND</td>
+                                </tr>
+                                decimal totalPrice = item.Products.Price * item.Cart.Quantity;
+                                totalAmount += totalPrice;
+                            }
+                        </tbody>
                         </table>
                     </div>
                 </div>
@@ -88,7 +89,7 @@
                         <h3>Cart Totals</h3>
                         <p class="d-flex">
                             <span>Subtotal</span>
-                            <span>$20.60</span>
+                            <span>@totalAmount VND</span>
                         </p>
                         <p class="d-flex">
                             <span>Delivery</span>
@@ -96,15 +97,19 @@
                         </p>
                         <p class="d-flex">
                             <span>Discount</span>
-                            <span>$3.00</span>
+                            <span>$0.00</span>
                         </p>
                         <hr>
                         <p class="d-flex total-price">
                             <span>Total</span>
-                            <span>$17.60</span>
+                            <span>@totalAmount</span>
                         </p>
                     </div>
-                    <p><a href="checkout.html" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
+              
+                      <p>
+                    <a href="@Url.Action("Index", "Checkout")" class="btn btn-primary py-3 px-4">THANH TOÁN</a>
+                </p> 
+
                 </div>
             </div>
         </div>
@@ -151,8 +156,90 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
     <script src="js/google-map.js"></script>
     <script src="js/main.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".quantity input").on('input', function () {
+            var quantity = $(this).val();
+            var price = $(this).closest('tr').find('.price').text().replace('$', '');
+            var totalPrice = parseFloat(price) * parseInt(quantity);
+            $(this).closest('tr').find('.total').text('$' + totalPrice.toFixed(2));
+            // Recalculate totalAmount
+            var totalAmount = 0;
+            $('.total').each(function () {
+                totalAmount += parseFloat($(this).text().replace('$', ''));
+            });
+            $('.total-price span:last').text('$' + totalAmount.toFixed(2));
+        });
+    });
+    $(document).ready(function () {
+        $(".quantity input").on('input', function () {
+            var Quantity = $(this).val();
+            $.ajax({
+                url: '/Cart/UpdateQuantity',
+                type: 'POST',
+                data: {
+                    Quantity: Quantity
+                },
+                success: function (response) {
+                    var notificationContainer = $('#notification-container');
+                    // Xóa thông báo cũ nếu có
+                    notificationContainer.empty();
+                    if (response.success) {
+                        // Hiển thị thông báo thành công
+                        var successNotification = $('<div>').addClass('notification success').text("Cập nhật số lượng thành công");
+                        notificationContainer.append(successNotification);
+                    } else {
+                        // Hiển thị thông báo thất bại
+                        var errorNotification = $('<div>').addClass('notification error').text("Cập nhật số lượng thất bại, vui lòng tải lại trang và thử lại");
+                        notificationContainer.append(errorNotification);
+                    }
+                    // Ẩn thông báo sau 3 giây
+                    setTimeout(function () {
+                        notificationContainer.children().fadeOut(300, function () {
+                            $(this).remove();
+                        });
+                    }, 3000);
+                },
+                error: function () {
+                    // Xử lý khi có lỗi xảy ra
+                    var errorNotification = $('<div>').addClass('notification error').text("Đã xảy ra lỗi khi cập nhật số lượng");
+                    $('#notification-container').append(errorNotification);
+                    // Ẩn thông báo sau 3 giây
+                    setTimeout(function () {
+                        errorNotification.fadeOut(300, function () {
+                            $(this).remove();
+                        });
+                    }, 3000);
+                }
+            });
+        });
+    });
+</script>
+<script>
+    window.addEventListener('load', function () {
+        var alerts = document.querySelectorAll('.alert');
+        alerts.forEach(function (alert) {
+            setTimeout(function () {
+                alert.classList.add('fade');
+                setTimeout(function () {
+                    alert.style.display = 'none';
+                }, 300);
+            }, 3000);
+        });
+    });
+</script>
+
+
+
+
+
+
+
+
 
     <script>
+        
         $(document).ready(function () {
 
             var quantitiy = 0;
@@ -188,5 +275,20 @@
 
         });
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+	window.addEventListener('load', function () {
+		var alerts = document.querySelectorAll('.alert');
+		alerts.forEach(function (alert) {
+			setTimeout(function () {
+				alert.classList.add('fade');
+				setTimeout(function () {
+					alert.style.display = 'none';
+				}, 300);
+			}, 3000);
+		});
+	});
+</script>
+
 
 

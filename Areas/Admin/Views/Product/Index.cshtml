@@ -1,0 +1,125 @@
+﻿ @using Doan.Models;
+@model IList<Products>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<style>
+    /* Định dạng cho tiêu đề trang */
+    .pagetitle {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    /* Định dạng cho các nhãn và ô nhập liệu */
+    .form-group label {
+        font-weight: bold;
+        color: #333;
+    }
+
+    .form-group input {
+        border-radius: 5px;
+        border: 1px solid #ddd;
+    }
+
+    /* Định dạng cho các hàng trong bảng */
+    .text-truncate {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .img-thumbnail {
+        max-width: 100px;
+        max-height: 100px;
+        object-fit: cover;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+    }
+
+    /* Khoảng cách giữa các nút */
+    .action-buttons {
+        display: flex;
+        gap: 5px; /* Khoảng cách giữa các nút */
+    }
+
+        .action-buttons .btn {
+            margin: 0; /* Loại bỏ khoảng cách mặc định */
+        }
+
+    /* Định dạng cho nút "Thêm sản phẩm" */
+    .btn-success {
+        background-color: #343a40;
+        border-color: #343a40;
+        color: #fff;
+    }
+
+        .btn-success:hover {
+            background-color: #343a40;
+            border-color: #343a40;
+        }
+
+   
+
+</style>
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h2 style="font-family:'Times New Roman'">Danh sách sản phẩm</h2>
+    </div>
+
+    <p>
+        <a type="button" class="btn btn-success" asp-area="admin" asp-controller="product" asp-action="Create">
+            <i class="bi bi-file-earmark-text me-1"></i> Thêm sản phẩm
+        </a>
+    </p>
+    <section class="section dashboard">
+        <div class="row">
+            <div class="col-12">
+                <div class="card recent-sales overflow-auto">
+                    <div class="card-body mt-4">
+                        <table class="table table-borderless datatable">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Hình ảnh</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Nội dung</th>
+                                    <th>Giá tiền</th>
+                                    <th>Danh mục</th>
+                                    <th>Đường dẫn</th>
+                                    <th>Ẩn/hiện</th>
+                                    <th>Chức năng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <th scope="row">@item.Id</th>
+                                        <td>
+                                            <img src="@item.Images" class="img-thumbnail">
+                                        </td>
+                                        <td class="text-truncate" style="max-width: 150px;">@item.Name</td>
+                                        <td class="text-truncate" style="max-width: 200px;">@item.Contents</td>
+                                        <td>@item.Price</td>
+
+                                        <td>@item.Category_id </td>
+                                        <td class="text-truncate" style="max-width: 150px;">@item.Link</td>
+                                        <td>@item.IsActive </td>
+                                        <td class="action-buttons">
+                                            <a asp-area="admin" asp-controller="Product" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm" title="Sửa sản phẩm">
+                                                <i class="bi bi-pencil"></i>
+                                            </a>
+                                            <a asp-area="admin" asp-controller="Product" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm" title="Xoá sản phẩm">
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
