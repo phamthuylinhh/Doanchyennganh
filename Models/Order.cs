@@ -20,5 +20,6 @@ namespace Doan.Models
         public string Name { get; set; }
         public int ProductID { get; set; }
         public int ProductSizeID { get; set; }
+		
     }
 }

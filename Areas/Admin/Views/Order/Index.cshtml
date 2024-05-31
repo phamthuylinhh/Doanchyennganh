@@ -1,0 +1,102 @@
+﻿
+ @using Doan.Models;
+@using Doan.Utilities;
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h2>Toàn bộ đơn hàng</h2>
+    </div>
+    <p>
+        <a asp-area="Admin" asp-controller="Order" asp-action="Index" class="btn btn-secondary mb-3">Quay lại danh sách đơn hàng</a>
+    </p>
+    <section class="section dashboard">
+        <div class="row">
+            <div class="col-12">
+                <div class="card recent-sales overflow-auto">
+                    <div class="card-body mt-4">
+                        <table class="table table-borderless datatable">
+                            <thead>
+                                <tr>
+                                    <th>Người đặt hàng</th>
+                                    <th>Người nhận hàng</th>
+                                    <th>Sản phẩm</th>
+                                    <th>Phương thức thanh toán</th>
+                                    <th>Giá tiền</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Địa chỉ</th>
+                                    <th>Trạng thái</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@Functions._UserName</td>
+                                        <td>@item.Name</td>
+                                        <td>@item.ProductID</td>
+                                        <td>
+                                            @if (item.Pay_method_id == 1)
+                                            {
+                                                <span>Chuyển khoản qua ngân hàng</span>
+                                            }
+                                            else if (item.Pay_method_id == 2)
+                                            {
+                                                <span>Thanh toán khi nhận hàng</span>
+                                            }
+                                        </td>
+                                        <td>@item.Price</td>
+                                        <td>@item.Phone</td>
+                                        <td style="max-width:200px;white-space:normal;overflow:hidden;text-overflow:ellipsis">@item.Address</td>
+                                        <td>
+                                            @if (item.Oder_status == "Hoàn thành")
+                                            {
+                                                <span class="badge bg-success">Hoàn thành</span>
+                                            }
+                                            else if (item.Oder_status == "Đang xử lý")
+                                            {
+                                                <span class="badge bg-warning">Đang xử lý</span>
+                                            }
+                                            else if (item.Oder_status == "Đã xác nhận")
+                                            {
+                                                <span class="badge bg-primary">Đã xác nhận</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge bg-danger">Chờ xác nhận</span>
+                                            }
+                                        </td>
+                                        <td>
+                                           @*  <a asp-area="Admin" asp-controller="Order" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm" title="Sửa đơn hàng">
+                                                <i class="bi bi-pencil"></i>
+                                            </a>
+                                            <a asp-area="Admin" asp-controller="Order" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm" title="Xóa đơn hàng">
+                                                <i class="bi bi-trash"></i>
+                                            </a> *@
+                                            @if (item.Oder_status != "Cancelled" && item.Oder_status != "Confirmed")
+                                            {
+                                                <a asp-area="Admin" asp-controller="Order" asp-action="Cancel" asp-route-id="@item.Id" class="btn btn-warning btn-sm" title="Huỷ đơn hàng">
+                                                    <i class="bi bi-x-circle"></i>
+                                                </a>
+                                            }
+                                            @if (item.Oder_status == "Pending")
+                                            {
+                                                <a asp-area="Admin" asp-controller="Order" asp-action="Confirm" asp-route-id="@item.Id" class="btn btn-success btn-sm" title="Xác nhận đơn hàng">
+                                                    <i class="bi bi-check-circle"></i>
+                                                </a>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

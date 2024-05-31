@@ -81,9 +81,7 @@
 
                             </div>
 
-                            <!-- Product Grid -->
-
-                            <div class="product-grid">
+                            <div class="product-grid" >
                                 @foreach(var product in Model)
                                 {
                                     <div class="product-item">
@@ -92,17 +90,17 @@
                                                 <img src="@product.Images" alt="">
                                             </div>
                                             <div class="favorite favorite_left">@product.Contents</div>
-                                            <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
+                                           
                                             <div class="product_info">
                                                 <h6 class="product_name">
-                                                    <a href="" style="overflow: hidden;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;">@product.Name</a>
+                                                    <a href="" style="overflow: hidden;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;color:black;font-family:'Times New Roman';font-size:16px">@product.Name</a>
                                                 </h6>
-                                                <div class="product_price">@product.Price VND</div>
+                                                <div class="product_price" style="color:#808080;font-family:'Times New Roman';font-size:16px">@product.Price.000 VND</div>
                                             </div>
                                         </div>
 
                                         <div class="red_button add_to_cart_button">
-                                            <a href="@Url.Action("Details", "Product", new {id = product.Id})" >Chi tiet</a>
+                                            <a href="@Url.Action("Details", "Product", new {id = product.Id})" >Chi tiết sản phẩm</a>
                                             </div>
                                     </div>
                                 }
@@ -162,13 +160,14 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="newsletter_form d-flex flex-md-row flex-column flex-xs-column align-items-center justify-content-lg-end justify-content-center">
-                    <input id="newsletter_email" type="email" placeholder="Your email" required="required" data-error="Valid email is required.">
-                    <button id="newsletter_submit" type="submit" class="newsletter_submit_btn trans_300" value="Submit">subscribe</button>
-                </div>
+                <form action="post">
+                    <div class="newsletter_form d-flex flex-md-row flex-column flex-xs-column align-items-center justify-content-lg-end justify-content-center">
+                        <input id="newsletter_email" type="email" placeholder="Your email" required="required" data-error="Valid email is required.">
+                        <button id="newsletter_submit" type="submit" class="newsletter_submit_btn trans_300" value="Submit" style="background-color:black">subscribe</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
-
 

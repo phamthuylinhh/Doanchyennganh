@@ -1,4 +1,4 @@
-﻿@using Doan.Areas.Admin.Models
+﻿ @using Doan.Areas.Admin.Models
 @model IList<AdminMenu>
 
 <aside id="sidebar" class="sidebar">
@@ -9,7 +9,8 @@
         <li class="nav-item">
             <a class="nav-link " href="index.html">
                 <i class="bi bi-grid"></i>
-                <span>Dashboard</span>
+                <span>Dashboard</span></br>
+         
             </a>
         </li>
         <!-- End Dashboard Nav -->
@@ -21,7 +22,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#@item.target" data-bs-toggle="collapse" href="#">
                     <i class="@item.icon"></i>
-                    <span>@item.name</span>
+                    <span style="font-family:'Times New Roman';font-size:18px">@item.name</span>
                     <i class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 @if (Smenu.Count != 0)
@@ -31,7 +32,7 @@
                         {
                             <li>
                                 <a href="/admin/@smn.controllerName/@smn.actionName">
-                                    <i class="bi bi-circle"></i><span>@smn.name</span>
+                                    <i class="bi bi-circle"></i><span style="font-family:'Times New Roman';font-size:18px">@smn.name</span>
                                 </a>
                             </li>
                         }
@@ -44,4 +45,4 @@
 
    
 
-</aside><!-- End Sidebar-->
+</aside><!-- End Sidebar--> 

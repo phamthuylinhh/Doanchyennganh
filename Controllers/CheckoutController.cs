@@ -56,7 +56,7 @@ namespace Doan.Controllers
                     Quantity = item.Quantity,
                     Price = (decimal)(item.Price ?? 0),
                     Address = address,
-                    Oder_status = "Paid",
+                    Oder_status = "Chờ xác nhận",
                     Pay_method_id = paymethodid,
                     Phone = phone,
                     Name = name
@@ -71,15 +71,41 @@ namespace Doan.Controllers
         [HttpGet]
         [Route("/history")]
         public IActionResult History() 
-        { 
-            var orderr = _context.Order.Where(m => m.User_id == Functions._UserID).Select(m => new
+        {
+            if (!Functions.IsLogin())
+                return RedirectToAction("Index", "Login");
+
+            var userId = Functions._UserID; // Giả sử có hàm lấy ID người dùng hiện tại
+            var orders = _context.Order
+                .Where(o => o.User_id == userId)
+                .Select(o => new {
+                    Order = o,
+                    Pay_method = _context.Pay_method.FirstOrDefault(pm => pm.Id == o.Pay_method_id),
+                    Products = _context.Products.FirstOrDefault(p => p.Id == o.ProductID),
+                    Product_size = _context.Product_size.FirstOrDefault(ps => ps.Id == o.ProductSizeID)
+                })
+                .OrderByDescending(o => o.Order.Created_at)
+                .ToList();
+
+            return View(orders);
+        }
+        [HttpPost]
+        [Route("/history")]
+        public IActionResult Cancel (string id, int productId, int productSizeId)
+        {
+            var order = _context.Order.FirstOrDefault(o => o.Id == id && o.ProductID == productId && o.ProductSizeID == productSizeId);
+            if(order == null)
             {
-                Order = m,
-                Products = _context.Products.Where(p => p.Id == m.ProductID).FirstOrDefault(),
-                Product_size = _context.Product_size.Where(p => p.Id == m.ProductSizeID).FirstOrDefault(),
-                Pay_method = _context.Pay_method.FirstOrDefault(p=> p.Id == m.Pay_method_id),
-            }).ToList();
-            return View(orderr);
+                return NotFound();
+            }
+            if (order.Oder_status == "Đã xác nhận")
+            {
+                return BadRequest("Không thể huỷ đơn hàng");
+            }
+            _context.Order.Remove(order);
+            order.Oder_status = "Đã huỷ";
+            _context.SaveChanges();
+            return RedirectToAction("History");
         }
     }
 }

@@ -82,10 +82,8 @@
                                     <th>#</th>
                                     <th>Hình ảnh</th>
                                     <th>Tên sản phẩm</th>
-                                    <th>Nội dung</th>
                                     <th>Giá tiền</th>
-                                    <th>Danh mục</th>
-                                    <th>Đường dẫn</th>
+                                    <th>Danh mục</th> 
                                     <th>Ẩn/hiện</th>
                                     <th>Chức năng</th>
                                 </tr>
@@ -99,11 +97,23 @@
                                             <img src="@item.Images" class="img-thumbnail">
                                         </td>
                                         <td class="text-truncate" style="max-width: 150px;">@item.Name</td>
-                                        <td class="text-truncate" style="max-width: 200px;">@item.Contents</td>
+                                        
                                         <td>@item.Price</td>
-
-                                        <td>@item.Category_id </td>
-                                        <td class="text-truncate" style="max-width: 150px;">@item.Link</td>
+                                        <td>
+                                            @if (item.Category_id == 1)
+                                            {
+                                                <span>Quần áo</span>
+                                            }
+                                            else if (item.Category_id == 2)
+                                            {
+                                                <span>Áo phông</span>
+                                            }
+                                           else if (item.Category_id == 3)
+                                           {
+                                               <span>Váy đầm</span>
+                                           }
+                                        </td>
+                                       
                                         <td>@item.IsActive </td>
                                         <td class="action-buttons">
                                             <a asp-area="admin" asp-controller="Product" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm" title="Sửa sản phẩm">
