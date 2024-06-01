@@ -103,6 +103,7 @@ namespace Doan.Controllers
                 return BadRequest("Không thể huỷ đơn hàng");
             }
             _context.Order.Remove(order);
+
             order.Oder_status = "Đã huỷ";
             _context.SaveChanges();
             return RedirectToAction("History");
