@@ -10,9 +10,20 @@ namespace Doan.Areas.Admin.Controllers
 		[Area("Admin")]
 		public IActionResult Index()
 		{
-			if (!Functions.IsLogin())
-				return RedirectToAction("Index", "Login");
-			return View();
+            if (!Functions.IsLogin())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                const int adminRoleId = 2; 
+                if (Functions._Role != adminRoleId)
+                {
+
+                    return RedirectToAction("Index", "ErrorRole");
+                }
+            }
+            return View();
 		}
 	}
 }

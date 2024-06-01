@@ -75,7 +75,7 @@ namespace Doan.Controllers
             if (!Functions.IsLogin())
                 return RedirectToAction("Index", "Login");
 
-            var userId = Functions._UserID; // Giả sử có hàm lấy ID người dùng hiện tại
+            var userId = Functions._UserID; 
             var orders = _context.Order
                 .Where(o => o.User_id == userId)
                 .Select(o => new {
@@ -91,18 +91,14 @@ namespace Doan.Controllers
         }
         [HttpPost]
         [Route("/history")]
-        public IActionResult Cancel (string id, int productId, int productSizeId)
+        public IActionResult Cancel(string id, int productId, int productSizeId)
         {
             var order = _context.Order.FirstOrDefault(o => o.Id == id && o.ProductID == productId && o.ProductSizeID == productSizeId);
-            if(order == null)
+            if (order == null)
             {
                 return NotFound();
             }
-            if (order.Oder_status == "Đã xác nhận")
-            {
-                return BadRequest("Không thể huỷ đơn hàng");
-            }
-            _context.Order.Remove(order);
+           
             order.Oder_status = "Đã huỷ";
             _context.SaveChanges();
             return RedirectToAction("History");

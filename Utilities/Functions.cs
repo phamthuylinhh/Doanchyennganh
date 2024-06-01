@@ -9,43 +9,46 @@ namespace Doan.Utilities
         public static int _UserID = 0;
         public static string _UserName = String.Empty;
         public static string _Email = String.Empty;
-        public static string _Message= String.Empty;
+        public static string _Message = String.Empty;
         public static string _MessageEmail = String.Empty;
-        public static string TitleSlugGEneration (string type, string title, long id)
+        public static int _Role = 0;
+        public static string TitleSlugGEneration(string type, string title, long id)
         {
-            string sTitle = type +"-" + SlugGenerator.SlugGenerator.GenerateSlug (title) + "-" +id.ToString() + ".html";
+            string sTitle = type + "-" + SlugGenerator.SlugGenerator.GenerateSlug(title) + "-" + id.ToString() + ".html";
             return sTitle;
         }
-        public static string MD5Hash (string text)
+        public static string MD5Hash(string text)
         {
-            MD5 md5 = new MD5CryptoServiceProvider ();
-            md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes (text));
+            MD5 md5 = new MD5CryptoServiceProvider();
+            md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(text));
             byte[] result = md5.Hash;
-            StringBuilder stringBuilder = new StringBuilder ();
+            StringBuilder stringBuilder = new StringBuilder();
             for (int i = 0; i < result.Length; i++)
             {
                 stringBuilder.Append(result[i].ToString("x2"));
             }
-            return stringBuilder.ToString ();
+            return stringBuilder.ToString();
         }
-        public static string MD5Password (string? text)
+        public static string MD5Password(string? text)
         {
             string str = MD5Hash(text);
-            for (int i = 0; i<=5; i++)
-                str = MD5Hash (str + "_" +str);
+            for (int i = 0; i <= 5; i++)
+                str = MD5Hash(str + "_" + str);
             return str;
         }
         public static bool IsLogin()
         {
-            if (string.IsNullOrEmpty(Functions._UserName) || string.IsNullOrEmpty (Functions._Email)|| (Functions._UserID <= 0))
+            if (string.IsNullOrEmpty(Functions._UserName) || string.IsNullOrEmpty(Functions._Email) || (Functions._UserID <= 0))
                 return false;
             return true;
         }
-		public static string getCurrentDate()
-		{
-			return DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-		}
+        public static string getCurrentDate()
+        {
+            return DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        }
+    
 
 
-	}
+    }
+
 }

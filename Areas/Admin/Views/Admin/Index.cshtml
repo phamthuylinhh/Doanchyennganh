@@ -1,5 +1,5 @@
 ﻿@using Doan.Areas.Admin.Models
-@model IList<User>
+@model IList<AdminUser>
 @{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="pagetitle">
-                    <h2>Danh sách người dùng</h2>
+                    <h2>Danh sách quản trị viên</h2>
                 </div>
             </div>
         </div>
@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <p>
-                    
+
                 </p>
             </div>
         </div>
@@ -30,7 +30,7 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Tên người dùng</th>
+                                        <th>Họ tên</th>
                                         <th>Email</th>
                                         <th>Mật khẩu</th>
                                         <th>Ẩn/Hiện</th>
@@ -41,8 +41,8 @@
                                     @foreach (var item in Model)
                                     {
                                         <tr>
-                                            <td>@item.Id</td>
-                                            <td>@item.Name</td>
+                                            <td>@item.UserId</td>
+                                            <td>@item.UserName</td>
                                             <td>@item.Email</td>
                                             <td>
                                                 <div class="password-toggle">
@@ -51,7 +51,7 @@
                                                 </div>
                                             </td>
                                             <td>@item.IsActive</td>
-                                           
+
                                         </tr>
                                     }
                                 </tbody>
@@ -64,18 +64,18 @@
     </div>
 </main>
 
-    <script>
-        function togglePassword(icon) {
-            var passwordInput = icon.previousElementSibling;
-            if (passwordInput.type === "password") {
-                passwordInput.type = "text";
-                icon.classList.remove("bi-eye");
-                icon.classList.add("bi-eye-slash");
-            } else {
-                passwordInput.type = "password";
-                icon.classList.remove("bi-eye-slash");
-                icon.classList.add("bi-eye");
-            }
+<script>
+    function togglePassword(icon) {
+        var passwordInput = icon.previousElementSibling;
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            icon.classList.remove("bi-eye");
+            icon.classList.add("bi-eye-slash");
+        } else {
+            passwordInput.type = "password";
+            icon.classList.remove("bi-eye-slash");
+            icon.classList.add("bi-eye");
         }
-    </script>
+    }
+</script>
 }

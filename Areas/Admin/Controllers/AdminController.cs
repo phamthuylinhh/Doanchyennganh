@@ -7,27 +7,27 @@ using Microsoft.EntityFrameworkCore;
 namespace Doan.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class UserController : Controller
+    public class AdminController: Controller
     {
         private readonly DataContext _context;
-        public UserController(DataContext context) { _context = context; }
+        public AdminController(DataContext context) { _context = context; }
         public IActionResult Index()
         {
-            
+
             if (!Functions.IsLogin())
             {
                 return RedirectToAction("Index", "Login");
             }
             else
             {
-                const int adminRoleId = 2; 
+                const int adminRoleId = 2;
                 if (Functions._Role != adminRoleId)
                 {
 
                     return RedirectToAction("Index", "ErrorRole");
                 }
             }
-            var mnList = _context.User.OrderBy(m => m.Id).ToList();
+            var mnList = _context.AdminUsers.OrderBy(m => m.UserId).ToList();
             return View(mnList);
         }
     }

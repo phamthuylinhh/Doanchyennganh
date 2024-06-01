@@ -17,9 +17,7 @@ namespace Doan.Controllers
         public async Task<IActionResult> Index(Dictionary<string, string> request)
         {
             if (!Functions.IsLogin())
-            {
-                Redirect(nameof(Index));
-            }
+                return RedirectToAction("Index", "login");
             var userId = Functions._UserID; // Lấy user_id của người dùng
             var cart = _context.Cart.Where(m => m.User_id == Functions._UserID).Select(m => new
             {

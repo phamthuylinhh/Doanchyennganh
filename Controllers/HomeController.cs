@@ -24,7 +24,7 @@ namespace Doan.Controllers
        
         public List<Products> Product()
         {
-            var products = (from p in _context.Products/*.Where(m => m.product_category_id == 1) */select p).ToList();
+            var products = (from p in _context.Products select p).ToList();
             return products;
         }
         
@@ -42,12 +42,12 @@ namespace Doan.Controllers
                 Functions._Email = string.Empty;
                 Functions._Message = string.Empty;
                 Functions._MessageEmail = string.Empty;
+                Functions._Role = 0;
 
-
-                //return RedirectToAction("Index", "Home");
-                return RedirectToAction("Index", "home", new { area = "" }); // is true
+                return RedirectToAction("Index", "home", new { area = "" }); 
 
             }
+           
         }
 
 

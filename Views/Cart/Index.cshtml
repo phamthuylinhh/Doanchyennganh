@@ -6,23 +6,23 @@
 @{
     decimal totalAmount = 0;
 }
-    <section class="ftco-section ftco-cart" style="margin-top: 120px;">
+    <section class="ftco-section ftco-cart" style="margin-top: 120px ; color:red">
         <div class="container">
-            <div class="row">
+            <div class="row" >
                 <div class="col-md-12 ftco-animate">
                     <div class="cart-list">
-                        <table class="table">
+                        <table class="table" style="background-color:red">
                             <thead class="thead-primary">
-                                <tr class="text-center">
+                                <tr class="text-center" style="red">
                                     <th>&nbsp;</th>
                                     <th>&nbsp;</th>
-                                    <th>Tên sản phẩm</th>
+                                    <th style="background-color:aquamarine">Tên sản phẩm</th>
                                     <th>Giá tiền</th>
                                     <th>Số lượng</th>
                                     <th>Tổng tiền</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody>3
                             @foreach (var item in @Model)
                             {
                                 <tr class="text-center" data-product-id="@item.Cart.Product_id" data-size-id="@item.Cart.Size_id" data-user-id="@item.Cart.User_id">

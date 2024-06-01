@@ -12,5 +12,6 @@ namespace Doan.Areas.Admin.Models
             public string? Password { get; set; }
             public string? Email { get; set; }
             public bool? IsActive { get; set; }
+            public int? Role {  get; set; }
     }
 }

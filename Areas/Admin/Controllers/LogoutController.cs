@@ -15,8 +15,7 @@ namespace Doan.Areas.Admin.Controllers
             Functions._MessageEmail = string.Empty;
 
 
-            //return RedirectToAction("Index", "Home");
-            return RedirectToAction("Index", "home", new { area = "" }); // is true
+            return RedirectToAction("Index", "home", new { area = "" }); 
 
         }
     }

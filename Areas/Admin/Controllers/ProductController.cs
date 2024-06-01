@@ -31,12 +31,36 @@ namespace Doan.Areas.Admin.Controllers
         public IActionResult Index()
         {
             if (!Functions.IsLogin())
+            {
                 return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                const int adminRoleId = 2;
+                if (Functions._Role != adminRoleId)
+                {
+
+                    return RedirectToAction("Index", "ErrorRole");
+                }
+            }
             var mnList = _context.Products.OrderBy(m => m.Id).ToList();
             return View(mnList);
         }
         public IActionResult Delete(int? id)
         {
+            if (!Functions.IsLogin())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                const int adminRoleId = 2; 
+                if (Functions._Role != adminRoleId)
+                {
+
+                    return RedirectToAction("Index", "ErrorRole");
+                }
+            }
             if (id == null || id == 0)
             {
                 return NotFound();
@@ -60,32 +84,22 @@ namespace Doan.Areas.Admin.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> UploadImages (int id, IFormFile image)
-        //{
-        //    var product = await _context.Products.FindAsync(id);
-        //    if(product == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    if (image != null && image.Length >0)
-        //    {
-        //        string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "images");
-        //        string uniqueFileName = Guid.NewGuid().ToString()+"_" +image.FileName;
-        //        string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-        //        using (var fileStream = new FileStream(filePath, FileMode.Create))
-        //        {
-        //            await image.CopyToAsync(fileStream);
-        //        }
-        //        product.Images = uniqueFileName;
-        //        await _context.SaveChangesAsync();
-
-        //    }
-        //    return RedirectToAction("Index");
-        //}
+       
         public IActionResult Create()
         {
+            if (!Functions.IsLogin())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                const int adminRoleId = 2; 
+                if (Functions._Role != adminRoleId)
+                {
+
+                    return RedirectToAction("Index", "ErrorRole");
+                }
+            }
             var pdList = (from m in _context.Products
                           select new SelectListItem()
                           {
@@ -104,19 +118,22 @@ namespace Doan.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Products mn)
         {
+            if (!Functions.IsLogin())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                const int adminRoleId = 2; // Khai báo hằng số cho vai trò "Admin"
+                if (Functions._Role != adminRoleId)
+                {
+
+                    return RedirectToAction("Index", "ErrorRole");
+                }
+            }
             if (ModelState.IsValid)
             {
-                //if(image !=null && image.Length>0)
-                //{
-                //    string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "images");
-                //    string uniqueFileName = Guid.NewGuid().ToString() + "_" + image.FileName;
-                //    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                //    using (var fileStream = new FileStream(filePath, FileMode.Create))
-                //    {
-                //        image.CopyTo(fileStream);
-                //    }
-                //    mn.Images = uniqueFileName;
-                //}
+               
                 _context.Products.Add(mn);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
@@ -125,6 +142,19 @@ namespace Doan.Areas.Admin.Controllers
         }
         public IActionResult Edit(int? id)
         {
+            if (!Functions.IsLogin())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                const int adminRoleId = 2; 
+                if (Functions._Role != adminRoleId)
+                {
+
+                    return RedirectToAction("Index", "ErrorRole");
+                }
+            }
             if (id == null || id == 0)
             {
                 return NotFound();
@@ -152,19 +182,21 @@ namespace Doan.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(Products mn)
         {
+            if (!Functions.IsLogin())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                const int adminRoleId = 2; 
+                if (Functions._Role != adminRoleId)
+                {
+
+                    return RedirectToAction("Index", "ErrorRole");
+                }
+            }
             if (ModelState.IsValid)
             {
-                //if (image != null && image.Length > 0)
-                //{
-                //    string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "images");
-                //    string uniqueFileName = Guid.NewGuid().ToString() + "_" + image.FileName;
-                //    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                //    using (var fileStream = new FileStream(filePath, FileMode.Create))
-                //    {
-                //        image.CopyTo(fileStream);
-                //    }
-                //    mn.Images = uniqueFileName;
-                //}
                 _context.Products.Update(mn);
                 _context.SaveChanges();
                 return RedirectToAction("Index");

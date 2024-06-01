@@ -17,12 +17,36 @@ namespace Doan.Areas.Admin.Controllers
         public IActionResult Index() 
         {
             if (!Functions.IsLogin())
+            {
                 return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                const int adminRoleId = 2; 
+                if (Functions._Role != adminRoleId)
+                {
+
+                    return RedirectToAction("Index", "ErrorRole");
+                }
+            }
             var mnList = _context.Menu.OrderBy(m=>m.MenuID).ToList();
             return View(mnList);    
         }
         public IActionResult Delete(int? id)
         {
+            if (!Functions.IsLogin())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                const int adminRoleId = 2; 
+                if (Functions._Role != adminRoleId)
+                {
+
+                    return RedirectToAction("Index", "ErrorRole");
+                }
+            }
             if (id == null || id == 0)
             {
                 return NotFound();
@@ -37,6 +61,19 @@ namespace Doan.Areas.Admin.Controllers
         [HttpPost]
         public  IActionResult Delete (int id)
         {
+            if (!Functions.IsLogin())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                const int adminRoleId = 2; 
+                if (Functions._Role != adminRoleId)
+                {
+
+                    return RedirectToAction("Index", "ErrorRole");
+                }
+            }
             var deleMenu = _context.Menu.Find(id);
             if (deleMenu == null)
             {
@@ -48,6 +85,19 @@ namespace Doan.Areas.Admin.Controllers
         }
         public IActionResult Create()
         {
+            if (!Functions.IsLogin())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                const int adminRoleId = 2; 
+                if (Functions._Role != adminRoleId)
+                {
+
+                    return RedirectToAction("Index", "ErrorRole");
+                }
+            }
             var mnList = (from m in _context.Menu
                           select new SelectListItem()
                           {
@@ -66,7 +116,20 @@ namespace Doan.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create (Menu mn)
         {
-            if(ModelState.IsValid)
+            if (!Functions.IsLogin())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                const int adminRoleId = 2;
+                if (Functions._Role != adminRoleId)
+                {
+
+                    return RedirectToAction("Index", "ErrorRole");
+                }
+            }
+            if (ModelState.IsValid)
             {
                 _context.Menu.Add(mn);
                 _context.SaveChanges();
@@ -76,6 +139,19 @@ namespace Doan.Areas.Admin.Controllers
         }
         public IActionResult Edit(int? id)
         {
+            if (!Functions.IsLogin())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                const int adminRoleId = 2;
+                if (Functions._Role != adminRoleId)
+                {
+
+                    return RedirectToAction("Index", "ErrorRole");
+                }
+            }
             if (id == null || id == 0)
             {
                 return NotFound();
@@ -103,6 +179,19 @@ namespace Doan.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit (Menu mn)
         {
+            if (!Functions.IsLogin())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                const int adminRoleId = 2; 
+                if (Functions._Role != adminRoleId)
+                {
+
+                    return RedirectToAction("Index", "ErrorRole");
+                }
+            }
             if (ModelState.IsValid)
             {
                 _context.Menu.Update(mn);

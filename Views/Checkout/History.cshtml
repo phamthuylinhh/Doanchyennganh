@@ -1,84 +1,7 @@
-﻿ @using Doan.Models;
+﻿@using Doan.Models;
 @using Doan.Utilities;
 
 <div class="container mt-5" style="padding-top:150px">
-    <h2 class="mb-4" style="font-family: 'Times New Roman', serif;">Lịch Sử Thanh Toán</h2>
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Ngày Thanh Toán</th>
-                    <th>Số Tiền</th>
-                    <th>Phương Thức Thanh Toán</th>
-                    <th>Trạng Thái</th>
-                    <th>Tên người nhận</th>
-                    <th>Số điện thoại</th>
-                    <th>Địa chỉ</th>
-                    <th>Sản phẩm</th>
-                    <th>Hành động</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>@item.Order.Created_at.ToString("dd/MM/yyyy HH:mm:ss")</td>
-                        <td>@item.Order.Price</td>
-                        <td>@item.Pay_method.Name</td>
-                        <td>
-                            @if (item.Order.Oder_status == "Đã xác nhận")
-                            {
-                                <span class="badge bg-primary">Đã xác nhận</span>
-                            }
-                            else if (item.Order.Oder_status == "Hoàn thành")
-                            {
-                                <span class="badge bg-success">Hoàn thành</span>
-                            }
-                            else if (item.Order.Oder_status == "Đã huỷ")
-                            {
-                                <span class="badge bg-danger">Đã hủy</span>
-                            }
-                            else
-                            {
-                                <span class="badge bg-warning">Chờ xác nhận</span>
-                            }
-                        </td>
-                        <td>@item.Order.Name</td>
-                        <td>@item.Order.Phone</td>
-                        <td >@item.Order.Address</td>
-                        <td>
-                            <textarea readonly>@(item.Products.Name + "\n" + item.Product_size.Name)</textarea>
-                        </td>
-                        <td>
-                            @if (item.Order.Oder_status != "Chờ xác nhận" && item.Order.Oder_status != "Đã huỷ")
-                            {
-                                <form asp-area="" asp-controller="Checkout" asp-action="cancel" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa đơn hàng này?');">
-                                    <input type="hidden" name="id" value="@item.Order.Id" />
-                                    <input type="hidden" name="productId" value="@item.Order.ProductID" />
-                                    <input type="hidden" name="productSizeId" value="@item.Order.ProductSizeID" />
-                                    <button type="submit" class="btn btn-danger btn-sm">
-                                        <i class="bi bi-trash"></i> Huỷ đơn hàng
-                                    </button>
-                                </form>
-                            }
-
-                            else
-                            {
-                                <span class="badge bg-secondary">Đã hủy</span>
-                            }
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-</div>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
- 
-@* <div class="container mt-5" style="padding-top:150px">
     <h2 class="mb-4" style="font-family: 'Times New Roman', serif;">Lịch Sử Thanh Toán</h2>
     <div class="table-responsive">
         <table class="table table-striped">
@@ -127,20 +50,24 @@
                             <textarea readonly>@(item.Products.Name + "\n" + item.Product_size.Name)</textarea>
                         </td>
                         <td>
-                            @if (item.Order.Oder_status != "Chờ xác nhận" && item.Order.Oder_status != "Đã huỷ")
+                            @if (item.Order.Oder_status == "Chờ xác nhận")
                             {
-                                <form asp-area="" asp-controller="Checkout" asp-action="Cancel" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn huỷ đơn hàng này?');">
+                                <form asp-area="" asp-controller="Checkout" asp-action="Cancel" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này?');">
                                     <input type="hidden" name="id" value="@item.Order.Id" />
                                     <input type="hidden" name="productId" value="@item.Order.ProductID" />
                                     <input type="hidden" name="productSizeId" value="@item.Order.ProductSizeID" />
                                     <button type="submit" class="btn btn-danger btn-sm">
-                                        <i class="bi bi-trash"></i> Huỷ
+                                        <i class="bi bi-trash"></i> Huỷ đơn hàng
                                     </button>
                                 </form>
                             }
-                            else
+                            else if (item.Order.Oder_status == "Đã huỷ")
                             {
                                 <span class="badge bg-secondary">Đã hủy</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">Đã giao</span>
                             }
                         </td>
                     </tr>
@@ -148,4 +75,4 @@
             </tbody>
         </table>
     </div>
-</d *@
+</div>

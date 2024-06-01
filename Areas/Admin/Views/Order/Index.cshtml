@@ -1,5 +1,4 @@
-﻿
- @using Doan.Models;
+﻿@using Doan.Models;
 @using Doan.Utilities;
 
 @{
@@ -10,9 +9,6 @@
     <div class="pagetitle">
         <h2>Toàn bộ đơn hàng</h2>
     </div>
-    <p>
-        <a asp-area="Admin" asp-controller="Order" asp-action="Index" class="btn btn-secondary mb-3">Quay lại danh sách đơn hàng</a>
-    </p>
     <section class="section dashboard">
         <div class="row">
             <div class="col-12">
@@ -57,37 +53,56 @@
                                             {
                                                 <span class="badge bg-success">Hoàn thành</span>
                                             }
-                                            else if (item.Oder_status == "Đang xử lý")
-                                            {
-                                                <span class="badge bg-warning">Đang xử lý</span>
-                                            }
                                             else if (item.Oder_status == "Đã xác nhận")
                                             {
                                                 <span class="badge bg-primary">Đã xác nhận</span>
                                             }
+                                            else if (item.Oder_status == "Chờ xác nhận")
+                                            {
+                                                <span class="badge bg-secondary">Chờ xác nhận</span>
+                                            }
                                             else
                                             {
-                                                <span class="badge bg-danger">Chờ xác nhận</span>
+                                                <span class="badge bg-danger">Đã huỷ</span>
                                             }
                                         </td>
                                         <td>
-                                           @*  <a asp-area="Admin" asp-controller="Order" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm" title="Sửa đơn hàng">
-                                                <i class="bi bi-pencil"></i>
-                                            </a>
-                                            <a asp-area="Admin" asp-controller="Order" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm" title="Xóa đơn hàng">
-                                                <i class="bi bi-trash"></i>
-                                            </a> *@
-                                            @if (item.Oder_status != "Cancelled" && item.Oder_status != "Confirmed")
+                                            @if (item.Oder_status == "Chờ xác nhận")
                                             {
-                                                <a asp-area="Admin" asp-controller="Order" asp-action="Cancel" asp-route-id="@item.Id" class="btn btn-warning btn-sm" title="Huỷ đơn hàng">
-                                                    <i class="bi bi-x-circle"></i>
-                                                </a>
+                                                <form asp-area="Admin" asp-controller="Order" asp-action="Confirm" method="post" style="display:inline-block;">
+                                                    <input type="hidden" name="id" value="@item.Id" />
+                                                    <input type="hidden" name="productId" value="@item.ProductID" />
+                                                    <input type="hidden" name="productSizeId" value="@item.ProductSizeID" />
+                                                    <button type="submit" class="btn btn-success btn-sm" title="Xác nhận đơn hàng">
+                                                        <i class="bi bi-check-circle"></i> Xác nhận
+                                                    </button>
+                                                </form>
+                                                <form asp-area="Admin" asp-controller="Order" asp-action="Cancel" method="post" style="display:inline-block;">
+                                                    <input type="hidden" name="id" value="@item.Id" />
+                                                    <input type="hidden" name="productId" value="@item.ProductID" />
+                                                    <input type="hidden" name="productSizeId" value="@item.ProductSizeID" />
+                                                   
+                                                </form>
                                             }
-                                            @if (item.Oder_status == "Pending")
+                                            else if (item.Oder_status == "Đã xác nhận")
                                             {
-                                                <a asp-area="Admin" asp-controller="Order" asp-action="Confirm" asp-route-id="@item.Id" class="btn btn-success btn-sm" title="Xác nhận đơn hàng">
-                                                    <i class="bi bi-check-circle"></i>
-                                                </a>
+                                                <form asp-area="Admin" asp-controller="Order" asp-action="Complete" method="post" style="display:inline-block;">
+                                                    <input type="hidden" name="id" value="@item.Id" />
+                                                    <input type="hidden" name="productId" value="@item.ProductID" />
+                                                    <input type="hidden" name="productSizeId" value="@item.ProductSizeID" />
+                                                    <button type="submit" class="btn btn-primary btn-sm" title="Hoàn thành đơn hàng">
+                                                        <i class="bi bi-check-all"></i> Hoàn thành
+                                                    </button>
+                                                </form>
+                                            }
+                                            else if (item.Oder_status == "Đã huỷ")
+                                            {
+                                                <form asp-area="Admin" asp-controller="Order" asp-action="Confirm" method="post" style="display:inline-block;">
+                                                    <input type="hidden" name="id" value="@item.Id" />
+                                                    <input type="hidden" name="productId" value="@item.ProductID" />
+                                                    <input type="hidden" name="productSizeId" value="@item.ProductSizeID" />
+                                                   
+                                                </form>
                                             }
                                         </td>
                                     </tr>

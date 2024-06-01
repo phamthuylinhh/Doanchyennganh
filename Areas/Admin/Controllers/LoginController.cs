@@ -37,6 +37,7 @@ namespace Doan.Areas.Admin.Controllers
             Functions._UserID = check.UserId;
             Functions._UserName = string.IsNullOrEmpty(check.UserName) ? string.Empty : check.UserName;
             Functions._Email = string.IsNullOrEmpty(check.Email) ? string.Empty : check.Email;
+            Functions._Role = (int)check.Role;
             return RedirectToAction("Index", "Home");
         }
 

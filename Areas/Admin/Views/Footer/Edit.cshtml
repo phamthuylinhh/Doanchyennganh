@@ -1,8 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿
 @model Doan.Models.Footer
 @{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -21,29 +17,11 @@
             <div asp-validation-summary="All"></div>
             <div class="form-row">
                 <input type="text" class="form-control mb-3" asp-for="Id" type="hidden" /> 
-               @*  <div class="form-group col-md-6">
-                    <label asp-for="Id">Tieu de</label>
-                    <input type="text" class="form-control mb-3" asp-for="Id" placeholder="Nhap tieu de" />
-                    <span asp-validation-for="Id" class="alert-danger"></span>
-                </div> *@
+              
             </div>
             <div class="form-row">
                 <div class="form-row">
-                   @*  <div class="form-group col-md-6">
-                        <label asp-for="Levels">Levels</label>
-                        <select asp-for="Levels" class="form-select" id="Levels">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <div class="alert-danger" asp-validation-summary="ModelOnly"></div>
-                        <label asp-for="ParentID">ParentID</label>
-                        <select asp-for="ParentID"
-                                class="form-control"
-                                asp-items="@(new SelectList(ViewBag.mnList,"Value", "Text"))">
-                        </select>
-                    </div> *@
+                   
                     <div class="form-group col-md-6">
                         <label asp-for="Title">Tiêu đề</label>
                         <input type="text" class="form-control mb-3" asp-for="Title" placeholder="Nhập tiêu đề" />
@@ -54,17 +32,7 @@
                         <input type="text" class="form-control mb-3" asp-for="Contents" placeholder="Nhập nội dung" />
                         <span asp-validation-for="Contents" class="alert-danger"></span>
                     </div>
-                   @*  <div class="form-group col-md-6">
-                        <label asp-for="Position">Position</label>
-                        <input type="text" class="form-control mb-3" asp-for="Position" placeholder="Enter Position" />
-                        <span asp-validation-for="Position" class="alert-danger"></span>
-                    </div>
-                    <div class="form-group mt-3 mb-5">
-                        <label>
-                            @Html.CheckBox("IsActive", Model.IsActive)
-                            Hiện thị
-                        </label>
-                    </div> *@
+                   
                 </div>
                 <button type="submit" class="btn btn-lg btn-rimary p-2"><i class="bi bi-file-plus-fill"></i>Lưu</button>
                 <a asp-controller="footer" asp-action="index" class="btn btn-lg btn-warning p-2">Quay  lại</a>

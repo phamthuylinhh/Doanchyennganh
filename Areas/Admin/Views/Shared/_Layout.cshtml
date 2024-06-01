@@ -41,8 +41,8 @@
 </head>
 
 <body>
-    
-    <!-- ======= Header ======= -->
+    @if (Functions._Role == 2)
+    {
     <header id="header" class="header fixed-top d-flex align-items-center">
 
         <div class="d-flex align-items-center justify-content-between">
@@ -256,21 +256,21 @@
                             <hr class="dropdown-divider">
                         </li>
 
-                      @*  <li>
-                            <a class="dropdown-item d-flex align-items-center" href="/">
-                                <i class="bi bi-box-arrow-right"></i>
-                                <span>Sign Out</span>
-                           
-                            </a>
+                        @*  <li>
+                        <a class="dropdown-item d-flex align-items-center" href="/">
+                        <i class="bi bi-box-arrow-right"></i>
+                        <span>Sign Out</span>
+
+                        </a>
                         </li>
-  *@
-                       @*  <li>
-                            <a class="dropdown-item d-flex align-items-center" href="/Admin/Home/Logout">
-                                <i class="bi bi-box-arrow-right"></i>
-                                <span>Sign Out</span>
-                            </a>
+                        *@
+                        @*  <li>
+                        <a class="dropdown-item d-flex align-items-center" href="/Admin/Home/Logout">
+                        <i class="bi bi-box-arrow-right"></i>
+                        <span>Sign Out</span>
+                        </a>
                         </li>
-  *@
+                        *@
                         <li>
                             <a class="dropdown-item d-flex align-items-center" href="/Admin/Logout/">
                                 <i class="bi bi-box-arrow-right"></i>
@@ -286,7 +286,10 @@
 
     </header><!-- End Header -->
     <!-- ======= Sidebar ======= -->
-   @await Component.InvokeAsync("AdminMenu")
+    
+        @await Component.InvokeAsync("AdminMenu")
+    }
+   
 
   @RenderBody()
 

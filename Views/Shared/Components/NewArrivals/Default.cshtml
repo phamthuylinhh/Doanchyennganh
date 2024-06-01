@@ -44,7 +44,7 @@
         }
 
     .product_info {
-        padding: 15px;
+        padding: 10px;
         text-align: center;
     }
 </style>
@@ -60,7 +60,7 @@
         <div class="row align-items-center">
             <div class="col text-center">
                 <div class="new_arrivals_sorting">
-                    <ul class="arrivals_grid_sorting clearfix button-group filters-button-group" style="font-family:'Times New Roman'; margin-top:-30px">
+                    <ul class="arrivals_grid_sortirng clearfix button-group filters-button-group" style="font-family:'Times New Roman'; margin-top:-30px">
                         <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked" data-filter="*">TẤT CẢ</li>
                         <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".quanao">QUẦN ÁO</li>
                         <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".aophong">ÁO PHÔNG</li>
@@ -72,7 +72,7 @@
         <div class="row">
             <div class="col">
                 <div class="product-grid" id="product-grid" style="margin-left:50px">
-                    @foreach (var item in Model)
+                    @foreach (var item in Model.Take(5))
                     {
                         <div class="product-item @(item.ParentID == 1 ? "quanao" : item.ParentID == 11 ? "aophong" : "vaydam")">
                             <div class="product product_filter">
