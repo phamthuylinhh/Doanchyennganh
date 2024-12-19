@@ -98,7 +98,16 @@ namespace Doan.Controllers
             {
                 return NotFound();
             }
+<<<<<<< HEAD
            
+=======
+            if (order.Oder_status == "Đã xác nhận")
+            {
+                return BadRequest("Không thể huỷ đơn hàng");
+            }
+            _context.Order.Remove(order);
+
+>>>>>>> 829173d62372530fe8808805d5d7d378ccfa1874
             order.Oder_status = "Đã huỷ";
             _context.SaveChanges();
             return RedirectToAction("History");
